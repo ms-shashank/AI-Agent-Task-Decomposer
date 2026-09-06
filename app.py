@@ -29,7 +29,7 @@ class CoordinatorAgent:
     def decompose_project(self, project_brief: str) -> List[Dict]:
         """Break down project brief into technical tasks"""
         
-        prompt = f"""You are a technical project coordinator. Given a project brief, break it down into specific, actionable technical tasks.
+        prompt = f"""You are a senior technical project coordinator. Given a project brief, break it down into specific part's, actionable technical tasks.
 
 Project Brief: {project_brief}
 
@@ -64,10 +64,10 @@ Return ONLY the JSON array, no additional text."""
             response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": "You are a technical project coordinator that decomposes projects into tasks."},
+                    {"role": "system", "content": "You are a senior technical project coordinator that decomposes projects into tasks."},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.7
+                temperature=0.5
             )
             
             content = response.choices[0].message.content.strip()
@@ -93,7 +93,7 @@ class BackendAgent:
     def generate_code(self, task: Dict, project_context: str) -> Dict:
         """Generate backend code including API, business logic, and database schema"""
         
-        prompt = f"""You are a backend development expert specializing in Python FastAPI and SQLite3.
+        prompt = f"""You are a senior backend development expert specializing in Python FastAPI and SQLite3.
 
 Project Context: {project_context}
 
@@ -158,7 +158,7 @@ class FrontendAgent:
     def generate_code(self, task: Dict, project_context: str) -> Dict:
         """Generate React UI components"""
         
-        prompt = f"""You are a frontend development expert specializing in React and responsive UI design.
+        prompt = f"""You are a senior frontend development expert specializing in React and responsive UI design.
 
 Project Context: {project_context}
 
@@ -194,10 +194,10 @@ Return ONLY the JSON object."""
             response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": "You are an expert frontend developer specializing in React and responsive UI design."},
+                    {"role": "system", "content": "You are an senior expert frontend developer specializing in React and responsive UI design."},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.7,
+                temperature=0.6,
                 max_tokens=2000
             )
             
